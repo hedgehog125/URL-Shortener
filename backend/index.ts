@@ -1,3 +1,4 @@
+import { PgDBClient } from "./src/db.js";
 import { loadEnvironmentVariables } from "./src/subfns/env.js";
 import {
 	configureExpress,
@@ -7,6 +8,8 @@ import {
 
 function main() {
 	const env = loadEnvironmentVariables();
+
+	const db = new PgDBClient(env);
 	const app = configureExpress();
 	registerEndpoints(app, env);
 	startServer(app, env);

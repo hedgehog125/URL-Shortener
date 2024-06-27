@@ -9,6 +9,7 @@ export function loadEnvironmentVariables(): Env {
 
 	return {
 		PORT: requireNumEnv("PORT"),
+		DATABASE_URL: requireEnv("DATABASE_URL"),
 	};
 }
 

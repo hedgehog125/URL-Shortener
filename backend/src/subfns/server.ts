@@ -7,10 +7,6 @@ import { miscEndpoints } from "../endpoints/endpoints.js";
 
 export function configureExpress(): Express {
 	const app = express();
-	app.use((req, res, next) => {
-		req.random = 2;
-		next();
-	});
 
 	return app;
 }
