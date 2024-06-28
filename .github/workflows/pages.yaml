@@ -53,6 +53,9 @@ jobs:
           PUBLIC_URL: /URL-Shortener
           VITE_API_URL: https://nicoclack-url-shortener.up.railway.app/
 
+      - name: Stat build
+        run: stat build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
