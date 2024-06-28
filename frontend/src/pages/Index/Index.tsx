@@ -1,5 +1,6 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Index(): JSX.Element {
 	const [urlInput, setUrlInput] = useState("");
@@ -28,7 +29,7 @@ export default function Index(): JSX.Element {
 				) : (
 					<p>
 						Your shortened URL is{" "}
-						<a href={shortenedUrl}>{shortenedUrl}</a>
+						<Link to={shortenedUrl}>{shortenedUrl}</Link>
 					</p>
 				))}
 		</div>
