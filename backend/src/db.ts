@@ -9,7 +9,7 @@ const MAX_ID_RETRIES = 10;
 
 export interface DBClient {
 	storeURL(originalURL: string): Promise<string>;
-	getStoredURL(id: string): Promise<string>;
+	getStoredURL(id: string): Promise<string | null>;
 }
 
 export class PgDBClient implements DBClient {
@@ -51,7 +51,16 @@ export class PgDBClient implements DBClient {
 
 		return urlId;
 	}
-	async getStoredURL(id: string): Promise<string> {
-		return "";
+	async getStoredURL(id: string): Promise<string | null> {
+		let url: string | null;
+		try {
+			url = await this._db("urls").where({ id }).select("url").first();
+		} catch (err: any) {
+			throw new Error(
+				`DB error occurred when getting URL:\n${err.message}`,
+			);
+		}
+
+		return url;
 	}
 }
