@@ -54,7 +54,8 @@ export class PgDBClient implements DBClient {
 	async getStoredURL(id: string): Promise<string | null> {
 		let url: string | null;
 		try {
-			url = await this._db("urls").where({ id }).select("url").first();
+			url = (await this._db("urls").where({ id }).select("url").first())
+				.url;
 		} catch (err: any) {
 			throw new Error(
 				`DB error occurred when getting URL:\n${err.message}`,

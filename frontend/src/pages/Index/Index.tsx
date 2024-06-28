@@ -57,6 +57,11 @@ export default function Index(): JSX.Element {
 
 		setErrored(false);
 		setLoading(false);
-		setShortenedUrl(location.href + urlId);
+
+		const urlObj = new URL(location.href);
+		urlObj.hash = "";
+		urlObj.search = "";
+
+		setShortenedUrl(urlObj.toString() + urlId);
 	}
 }
