@@ -11,7 +11,7 @@ function main() {
 
 	const db = new PgDBClient(env);
 	const app = configureExpress();
-	registerEndpoints(app, env);
+	registerEndpoints(app, db, env);
 	startServer(app, env);
 }
 main();
