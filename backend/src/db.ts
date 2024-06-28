@@ -18,6 +18,10 @@ export class PgDBClient implements DBClient {
 	constructor(env: Env) {
 		this._db = knex({
 			client: "pg",
+			pool: {
+				min: 0,
+				idleTimeoutMillis: 30_000,
+			},
 			connection: env.DATABASE_URL,
 		});
 		this._db.migrate.latest(); // Async!
