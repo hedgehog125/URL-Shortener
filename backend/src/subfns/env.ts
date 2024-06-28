@@ -10,6 +10,7 @@ export function loadEnvironmentVariables(): Env {
 	return {
 		PORT: requireNumEnv("PORT"),
 		DATABASE_URL: requireEnv("DATABASE_URL"),
+		CORS_ALLOWED_ORIGINS: requireStrArrEnv("CORS_ALLOWED_ORIGINS"),
 	};
 }
 
@@ -24,7 +25,9 @@ function requireEnv(name: string): string {
 	return value;
 }
 function requireStrArrEnv(name: string): string[] {
-	return requireEnv(name).split(",");
+	return requireEnv(name)
+		.split(",")
+		.filter((value) => value.trim() !== "");
 }
 function requireNumEnv(name: string): number {
 	const parsed = Number(requireEnv(name));

@@ -10,7 +10,7 @@ function main() {
 	const env = loadEnvironmentVariables();
 
 	const db = new PgDBClient(env);
-	const app = configureExpress();
+	const app = configureExpress(env);
 	registerEndpoints(app, db, env);
 	startServer(app, env);
 }
