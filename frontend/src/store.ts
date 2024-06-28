@@ -1,6 +1,14 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+	combineReducers,
+	configureStore,
+	type Reducer,
+} from "@reduxjs/toolkit";
+
+const exampleReducer = ((_initial = null, _action) => null) satisfies Reducer;
 
 const store = configureStore({
-	reducer: combineReducers({}),
+	reducer: combineReducers({
+		example: exampleReducer,
+	}),
 });
 export default store;
