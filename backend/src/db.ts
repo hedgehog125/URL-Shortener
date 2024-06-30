@@ -58,8 +58,14 @@ export class PgDBClient implements DBClient {
 	async getStoredURL(id: string): Promise<string | null> {
 		let url: string | null;
 		try {
-			url = (await this._db("urls").where({ id }).select("url").first())
-				.url;
+			const row = await this._db("urls")
+				.where({ id })
+				.select("url")
+				.first();
+			// Knex returns undefined instead of null
+			if (row == null) return null;
+
+			url = row.url;
 		} catch (err: any) {
 			throw new Error(
 				`DB error occurred when getting URL:\n${err.message}`,
