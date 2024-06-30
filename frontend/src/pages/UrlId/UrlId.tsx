@@ -16,8 +16,9 @@ export default function UrlId(): JSX.Element {
 				const res = await fetch(
 					import.meta.env.VITE_API_URL + "v1/short-url/" + urlId,
 				);
-				if (res.status == 404) {
-					setDisplayedError("not-found");
+				if (! res.ok) {
+					setDisplayedError(res.status === 404? "not-found" : "other");
+					return;
 				}
 				fullUrl = (await res.json()).fullUrl;
 			} catch {
